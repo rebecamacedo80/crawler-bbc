@@ -4,7 +4,8 @@ import scrapy
 class BBCSpider(scrapy.Spider):
     name = "bbc"
     start_urls = [
-            'https://www.bbc.com/portuguese/geral-50260437',            
+            'https://www.bbc.com/portuguese/geral-50260437',
+            'https://www.bbc.com/portuguese/geral-50756103'           
     ]
         
          
@@ -22,4 +23,5 @@ class BBCSpider(scrapy.Spider):
         if next_page is not None:
             next_page = response.urljoin(next_page)
             yield scrapy.Request(next_page, callback=self.parse)
+
 
