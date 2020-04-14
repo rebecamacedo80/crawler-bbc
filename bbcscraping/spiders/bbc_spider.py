@@ -4,8 +4,8 @@ class QuotesSpider(scrapy.Spider):
     name = "bbc"
 
     start_urls = [
-        # BRASIL 'https://www.bbc.com/portuguese/topics/cz74k717pw5t'
-        'https://www.bbc.com/portuguese/topics/c404v027pd4t' #TECNOLOGIA
+        'https://www.bbc.com/portuguese/topics/cz74k717pw5t' # BRASIL 
+        # 'https://www.bbc.com/portuguese/topics/c404v027pd4t' # TECNOLOGIA
     ]
 
     def parse(self, response):
@@ -27,20 +27,11 @@ class QuotesSpider(scrapy.Spider):
 
         text = response.css("div.story-body")[0]
 
-        hiperlink = text.css("div.story-body__inner p.story-body__introduction a.story-body__link::text").get()
+        title = text.css("h1.story-body__h1::text").get()
 
-        subtitle = text.css("div.story-body__inner p.story-body__introduction::text").getall()
-
-        if hiperlink is not None:
-            if len(subtitle) > 1:
-                subtitle = subtitle[0] + hiperlink + subtitle[len(subtitle)-1]
-            else:
-                pass
-            
-        else:
-            subtitle = text.css("div.story-body__inner p.story-body__introduction::text").get()
+        subtitle = response.css('meta[name="description"]::attr(content)').get()
 
         yield{
-            'title': text.css("h1.story-body__h1::text").get(),
+            'title': title,
             'subtitle': subtitle
         }
