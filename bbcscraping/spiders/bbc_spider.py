@@ -1,11 +1,15 @@
 import scrapy
 
-class QuotesSpider(scrapy.Spider):
+class BBCSpider(scrapy.Spider):
     name = "bbc"
 
     start_urls = [
-        'https://www.bbc.com/portuguese/topics/cz74k717pw5t' # BRASIL 
+        # 'https://www.bbc.com/portuguese/topics/cz74k717pw5t' # BRASIL 
+        # 'https://www.bbc.com/portuguese/topics/cvjp2jr0k9rt' # ECONOMIA
+        # 'https://www.bbc.com/portuguese/topics/c340q430z4vt' # SAÚDE
+        'https://www.bbc.com/portuguese/topics/cr50y580rjxt' # CIÊNCIA
         # 'https://www.bbc.com/portuguese/topics/c404v027pd4t' # TECNOLOGIA
+
     ]
 
     def parse(self, response):
