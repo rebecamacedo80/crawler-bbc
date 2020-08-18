@@ -5,7 +5,7 @@ from nltk.stem import RSLPStemmer
 import spacy
 from spacy.lemmatizer import Lemmatizer
 
-df = pd.read_csv('/home/rebeca/preprocessedData.csv')
+df = pd.read_csv('/home/rebeca/crawler-bbc/filters/1exemplo-boasentença.csv')
 df_good = pd.DataFrame(columns=['Title', 'Subtitle'])
 df_bad = pd.DataFrame(columns=['Title', 'Subtitle'])
 
@@ -51,12 +51,14 @@ for index, row in df.iterrows():
         if word in words_sub:
             count = count + 1
     
-    if len(words_tit) != 0:
+    if len(words_tit) != 0:        
         if count/len(words_tit) > 0.40:
+            print(count, 'palavras do título no subtítulo\n', count/len(words_tit), 'ponderado.')
             good_sentence = good_sentence + 1
 
             print('\n----------------------------------------------------------------\n')
             print('BOA DUPLA:\nTitle: "', title, '"\nSubtitle: ', subtitle)
+            print('\n\nBOA DUPLA PREPROCESSED:\nTitle: "', words_tit, '"\nSubtitle: ', words_sub)
 
             df_good = df_good.append({'Title': title, 'Subtitle': subtitle}, ignore_index=True)
 
@@ -73,88 +75,9 @@ for index, row in df.iterrows():
     words_tit.clear()
     words_sub.clear()
 
-df_good.to_csv( "dupasBoas.csv", index=False, encoding='utf-8-sig')
+""" df_good.to_csv( "dupasBoas.csv", index=False, encoding='utf-8-sig')
 df_bad.to_csv( "duplasRuins.csv", index=False, encoding='utf-8-sig')
 
 print('\n----------------------------------------------------------------\n')    
 print('Sentenças boas = ', good_sentence, '\n')
-print('Sentenças ruins = ', bad_sentence, '\n')
-
-
-""" def convertSingular(self, word):
-        if word[-3:] == 'éis':
-            word = word.replace(word[-3:], 'el')
-            return word
-
-        elif word[-3:] == 'ais':
-            word = word.replace(word[-3:], 'al')
-            return word
-        
-        elif word[-3:] == 'uis':
-            word = word.replace(word[-3:], 'ul')
-            return word
-        
-        elif word[-3:] == 'óis':
-            word = word.replace(word[-3:], 'ol')
-            return word
-
-        elif word[-3:] == 'eis':
-            word = word.replace(word[-3:], 'il')
-            return word
-
-        elif word[-3:] in ['ãos', 'ães', 'ões']:
-            word = word.replace(word[-3:], 'ão')
-            return word
-
-        elif word[-3:] in ['res', 'zes', 'ses']:
-            word = word.replace(word[-2:], '')
-            return word
-
-        elif word[-2:] == 'ns':
-            word = word.replace(word[-2:], 'm')
-            return word
-        
-        elif word[-2:] == 'is':
-            word = word.replace(word[-2:], 'il')
-            return word
-
-        elif word[-1:] == 's':
-            word = word[:-1]
-            return word
-
-        else:
-            return word """  
-
-#doc = nlp(u'Você encontrou o livro que eu te falei, Carla?')
-
-""" stop_words = stopwords.words('portuguese')
-stemmer = RSLPStemmer()
-
-words_tit = []
-words_sub = []
-
-for index, row in df.iterrows():
-    title = row['title'].lower()
-    subtitle = row['subtitle'].lower()
-
-    title_tokens = word_tokenize(title)
-    subtitle_tokens = word_tokenize(subtitle)
-
-    for token in title_tokens:
-        if token not in stop_words:
-            words_tit.append(stemmer.stem(token))
-
-    print('"', title, '"\n')
-    print('titulo tokenizado:\n', words_tit, '\n\n')
-
-    for token in subtitle_tokens:
-        if token not in stop_words:
-            words_sub.append(stemmer.stem(token))
-    
-    print('"', subtitle, '"\n')
-    print('subtitulo tokenizado:\n', words_sub, '\n\n')
-
-    print('#################################################################\n')
-
-    words_tit.clear()
-    words_sub.clear() """
+print('Sentenças ruins = ', bad_sentence, '\n') """
