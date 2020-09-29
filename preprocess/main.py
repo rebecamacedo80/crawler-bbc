@@ -2,9 +2,9 @@ from preprocess import Preprocess
 
 def main():
     # Preprocess().get_vocabulary('/home/rebeca/crawler-bbc/filters/duplasBoas.csv')
-    # Preprocess().preprocess('/home/rebeca/crawler-bbc/filters/duplasBoas.csv')
+    Preprocess().preprocess('/home/rebeca/crawler-bbc/duplasBoas.csv')
     # Preprocess().get_length('/home/rebeca/crawler-bbc/preprocess/duplasBoas_pp.csv')
-    Preprocess().get_graph('/home/rebeca/crawler-bbc/preprocess/LenSubtitles.csv')
+    # Preprocess().get_graph('/home/rebeca/crawler-bbc/preprocess/LenSubtitles.csv')
     
         
 if __name__ == '__main__':

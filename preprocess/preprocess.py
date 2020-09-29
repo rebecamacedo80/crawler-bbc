@@ -20,6 +20,8 @@ class Preprocess:
 
     def preprocess(self, caminho):
         df = pd.read_csv(caminho)
+        df = df.loc[22:24]
+        print(df)
         good = pd.DataFrame(columns=['title', 'subtitle'])
         
         for index, row in df.iterrows():
